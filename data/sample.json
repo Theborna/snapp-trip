@@ -1,0 +1,9 @@
+{
+    "origin": "THR",
+    "destination": "FBD",
+    "agency": "ARA",
+    "supplier": "amir",
+    "airline": "mahan",
+    "base_price": 1000,
+    "markup": 200
+}
