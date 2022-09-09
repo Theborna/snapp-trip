@@ -5,6 +5,10 @@ type Request interface {
 	PrettyString() string
 }
 
+type NamedData interface {
+	validate() error
+}
+
 type RequestImpl struct{}
 
 type (
