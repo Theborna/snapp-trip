@@ -9,34 +9,29 @@ import (
 const (
 	path1 = "data/sample.json"
 	path2 = "data/sample2.json"
+	path3 = "data/create_rule_request.json"
 	link2 = "https://filebin.net/x3ky3d43jerain9a"
 )
 
 func main() {
-	json_data := data.GetFromPath(path2)
-	flight := model.TripFromJson(json_data)
-	// println(flight.Route)
-	fmt.Println(flight.Agency)
-	fmt.Println(flight.Route)
-	println(flight.ToString())
-	// fmt.Println(flight.PrettyString())
-	body := data.GetFromLink(link2)
-	println(string(body))
+	json_data := data.GetFromPath(path1)
+	flight := model.TripsFromJson(json_data)
+	fmt.Println(flight[0].Agency)
+	fmt.Println(flight[0].Origin)
+	println(flight[0].ToString())
+	fmt.Println(flight[0].PrettyString())
+
+	rule_json_data := data.GetFromPath(path3)
+	rules := model.RulesFromJson(rule_json_data)
+	fmt.Println(rules[0].Airlines)
+	fmt.Println(rules[0].Routes)
+	println(rules[0].ToString())
+	fmt.Println(rules[0].PrettyString())
+	rules[0].Info()
+	// flight[0]
+	// body := data.GetFromLink(link2)
+	// println(string(body))
 	// flight_link := model.TripFromJson(body)
 	// println(flight_link.ToString())
 	// add_file()
 }
-
-// func add_file() {
-// 	http.HandleFunc("/", greet)
-// 	http.ListenAndServe(":8080", nil)
-// }
-
-// func greet(w http.ResponseWriter, r *http.Request) {
-// 	file_data, err := ioutil.ReadFile(path2)
-// 	if err != nil {
-// 		fmt.Println(err)
-// 	}
-// 	// return string(file_data)
-// 	fmt.
-// }

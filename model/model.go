@@ -1,47 +1,56 @@
 package model
 
-import (
-	"encoding/json"
-	"log"
-)
+type Request interface {
+	ToString() string
+	PrettyString() string
+}
 
-type Path struct {
+type RequestImpl struct{}
+
+type Route struct {
 	Origin      string `json:"origin"`
 	Destination string `json:"destination"`
 }
 
 type Trip struct {
-	// Origin      string `json:"origin"`
-	// Destination string `json:"destination"
-	Route     Path   `json:"route"`
-	Agency    string `json:"agency"`
-	Supplier  string `json:"supplier"`
-	Airline   string `json:"airline"`
-	BasePrice int    `json:"base_price"`
-	MarkUp    int    `json:"markup"`
+	RequestImpl
+	RuleId      int    `json:"ruleId"`
+	Origin      string `json:"origin"`
+	Destination string `json:"destination"`
+	// Route     Route   `json:"route"`
+	Agency       string `json:"agency"`
+	Supplier     string `json:"supplier"`
+	Airline      string `json:"airline"`
+	BasePrice    int    `json:"basePrice"`
+	MarkUp       int    `json:"markup"`
+	PayablePrice int    `json:"payablePrice"`
 }
 
-func TripFromJson(jsonData []byte) Trip {
-	var trip Trip
-	err := json.Unmarshal(jsonData, &trip)
-	if err != nil {
-		log.Fatalf("Error occurred during decoding. Error: %s", err.Error())
-	}
-	return trip
+type amountType string
+
+const (
+	FIXED      amountType = "FIXED"
+	PERCENTAGE            = "PERCENTAGE"
+)
+
+type Rule struct {
+	RequestImpl
+	Routes      []Route    `json:"routes"`
+	Airlines    []string   `json:"airlines"`
+	Agencies    []string   `json:"agencies"`
+	Suppliers   []string   `json:"suppliers"`
+	AmountType  amountType `json:"amountType"`
+	AmountValue int        `json:"amountValue"`
 }
 
-func (self *Trip) ToString() string {
-	json, err := json.Marshal(self)
-	if err != nil {
-		log.Fatalf("Error occurred during encoding. Error: %s", err.Error())
-	}
-	return string(json)
-}
+type status string
 
-func (self *Trip) PrettyString() string {
-	b, err := json.MarshalIndent(self, "", "   ")
-	if err != nil {
-		log.Fatalf("Error occurred during encoding. Error: %s", err.Error())
-	}
-	return string(b)
+const (
+	SUCCESS status = "SUCCESS"
+	FAILED         = "FAILED"
+)
+
+type Response struct {
+	Message string `json:"message"`
+	Status  status `json:"status"`
 }
