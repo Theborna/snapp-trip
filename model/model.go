@@ -7,48 +7,54 @@ type Request interface {
 
 type RequestImpl struct{}
 
+type (
+	amountType string
+	status     string
+)
+
+const ( // enumms
+	FIXED      amountType = "FIXED"
+	PERCENTAGE amountType = "PERCENTAGE"
+)
+const (
+	SUCCESS status = "SUCCESS"
+	FAILED  status = "FAILED"
+)
+
+type (
+	City     string
+	Agency   string
+	Supplier string
+	Airline  string
+)
+
 type Route struct {
-	Origin      string `json:"origin"`
-	Destination string `json:"destination"`
+	Origin      City `json:"origin"`
+	Destination City `json:"destination"`
 }
 
 type Trip struct {
 	RequestImpl
-	RuleId      int    `json:"ruleId"`
-	Origin      string `json:"origin"`
-	Destination string `json:"destination"`
-	// Route     Route   `json:"route"`
-	Agency       string `json:"agency"`
-	Supplier     string `json:"supplier"`
-	Airline      string `json:"airline"`
-	BasePrice    int    `json:"basePrice"`
-	MarkUp       int    `json:"markup"`
-	PayablePrice int    `json:"payablePrice"`
+	RuleId       int      `json:"ruleId"`
+	Origin       City     `json:"origin"`
+	Destination  City     `json:"destination"`
+	Agency       Agency   `json:"agency"`
+	Supplier     Supplier `json:"supplier"`
+	Airline      Airline  `json:"airline"`
+	BasePrice    int      `json:"basePrice"`
+	MarkUp       int      `json:"markup"`
+	PayablePrice int      `json:"payablePrice"`
 }
-
-type amountType string
-
-const (
-	FIXED      amountType = "FIXED"
-	PERCENTAGE            = "PERCENTAGE"
-)
 
 type Rule struct {
 	RequestImpl
 	Routes      []Route    `json:"routes"`
-	Airlines    []string   `json:"airlines"`
-	Agencies    []string   `json:"agencies"`
-	Suppliers   []string   `json:"suppliers"`
+	Airlines    []Airline  `json:"airlines"`
+	Agencies    []Agency   `json:"agencies"`
+	Suppliers   []Supplier `json:"suppliers"`
 	AmountType  amountType `json:"amountType"`
 	AmountValue int        `json:"amountValue"`
 }
-
-type status string
-
-const (
-	SUCCESS status = "SUCCESS"
-	FAILED         = "FAILED"
-)
 
 type Response struct {
 	Message string `json:"message"`
