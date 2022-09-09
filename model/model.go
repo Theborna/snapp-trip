@@ -1,5 +1,6 @@
 package model
 
+// interfaces
 type Request interface {
 	ToString() string
 	PrettyString() string
@@ -11,12 +12,13 @@ type NamedData interface {
 
 type RequestImpl struct{}
 
+// enums
 type (
 	amountType string
 	status     string
 )
 
-const ( // enumms
+const (
 	FIXED      amountType = "FIXED"
 	PERCENTAGE amountType = "PERCENTAGE"
 )
@@ -25,6 +27,7 @@ const (
 	FAILED  status = "FAILED"
 )
 
+// named data
 type (
 	City     string
 	Agency   string
@@ -32,6 +35,7 @@ type (
 	Airline  string
 )
 
+// data types
 type Route struct {
 	Origin      City `json:"origin"`
 	Destination City `json:"destination"`

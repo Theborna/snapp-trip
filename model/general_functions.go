@@ -23,12 +23,12 @@ func RulesFromJson(jsonData []byte) []Rule {
 	return rules
 }
 
-func ToString(__self interface{}) string {
+func ToString(__self interface{}) []byte {
 	json, err := json.Marshal(__self)
 	if err != nil {
 		log.Fatalf("Error occurred during encoding. Error: %s", err.Error())
 	}
-	return string(json)
+	return json
 }
 
 func PrettyString(__self interface{}) string {
@@ -39,7 +39,7 @@ func PrettyString(__self interface{}) string {
 	return string(b)
 }
 
-func (__self *Trip) ToString() string {
+func (__self *Trip) ToString() []byte {
 	return ToString(__self)
 }
 
@@ -47,7 +47,7 @@ func (__self *Trip) PrettyString() string {
 	return PrettyString(__self)
 }
 
-func (__self *Rule) ToString() string {
+func (__self *Rule) ToString() []byte {
 	return ToString(__self)
 }
 
@@ -64,7 +64,7 @@ func (__self *Rule) Info() {
 	log.Printf("the AmountValue are %v with  type %T ", __self.AmountValue, __self.AmountValue)
 }
 
-func (__self *Response) ToString() string {
+func (__self *Response) ToString() []byte {
 	return ToString(__self)
 }
 

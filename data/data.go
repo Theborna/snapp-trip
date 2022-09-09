@@ -21,7 +21,9 @@ func GetFromLink(link string) []byte {
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println(err)
+	}
 	ioutil.WriteFile("dump", body, 0600)
 	return body
 }
-
