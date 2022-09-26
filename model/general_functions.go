@@ -55,6 +55,14 @@ func (__self *Rule) PrettyString() string {
 	return PrettyString(__self)
 }
 
+func (__self *Route) ToString() []byte {
+	return ToString(__self)
+}
+
+func (__self *Route) PrettyString() string {
+	return PrettyString(__self)
+}
+
 func (__self *Rule) Info() {
 	log.Printf("the Routes are %v with  type %T ", __self.Routes, __self.Routes)
 	log.Printf("the Airlines are %v with  type %T ", __self.Airlines, __self.Airlines)

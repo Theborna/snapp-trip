@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	data "snapp-trip/data"
 	model "snapp-trip/model"
+	server "snapp-trip/server"
 )
 
 const (
@@ -13,7 +13,7 @@ const (
 )
 
 func main() {
-	json_data := data.GetFromPath(path2)
+	json_data := server.GetFromPath(path2)
 	flight := model.TripsFromJson(json_data)
 	fmt.Println(len(flight))
 	fmt.Println(flight[0].Agency)
@@ -21,13 +21,8 @@ func main() {
 	println(flight[0].ToString())
 	fmt.Println(flight[0].PrettyString())
 
-	// rule_json_data := data.GetFromPath(path2)
-	// rules := model.RulesFromJson(rule_json_data)
-	// fmt.Println(rules[0].Airlines)
-	// fmt.Println(rules[0].Routes)
-	// println(rules[0].ToString())
-	// fmt.Println(rules[0].PrettyString())
-	// rules[0].Info()
+	server.Connect()
+
 	// flight[0]
 	// body := data.GetFromLink(link2)
 	// println(string(body))
