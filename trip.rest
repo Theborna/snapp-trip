@@ -1,0 +1,122 @@
+### GOOD REQUEST
+POST  http://localhost:5500/create-rule
+Content-Type: application/json
+
+[
+  {
+    "routes": [
+      {
+        "origin": "THR",
+        "destination": "MHD"
+      },
+      {
+        "origin": null,
+        "destination": "SYZ"
+      }
+    ],
+    "airlines": [
+      "zv",
+      "i3"
+    ],
+    "agencies": [
+      "MOGHIM_TEST_AGENCY",
+      "SHADI_AVARAN_SAFAR"
+    ],
+    "suppliers": [
+      "faranegar",
+      "aseman"
+    ],
+    "amountType": "FIXED",
+    "amountValue": 100000
+  },
+  {
+    "routes": null,
+    "airlines": [
+      "ep"
+    ],
+    "agencies": null,
+    "suppliers": ["zagros"
+    ],
+    "amountType": "PERCENTAGE",
+    "amountValue": 2
+  },
+  {
+    "routes": [
+      {
+        "origin": "THR",
+        "destination": "IFN"
+      },
+      {
+        "origin": null,
+        "destination": "SYZ"
+      }
+    ],
+    "airlines": [
+      "zv",
+      "i3"
+    ],
+    "agencies": [
+      "MOGHIM_TEST_AGENCY",
+      "SHADI_AVARAN_SAFAR",
+      "ELVA_SEIR"
+    ],
+    "suppliers": [
+      "faranegar",
+      "aseman"
+    ],
+    "amountType": "FIXED",
+    "amountValue": 100000
+  }
+]
+
+### CHANGE PRICE REQUEST
+POST  http://localhost:5500/change-price
+Content-Type: application/json
+
+[
+  {
+    "origin": "THR",
+    "destination": "IFN",
+    "airline": "zv",
+    "agency": "ELVA_SEIR",
+    "supplier": "aseman",
+    "basePrice": 15000000,
+    "markup": 0,
+    "payablePrice": 0
+  },
+  {
+    "origin": "SYZ",
+    "destination": "MHD",
+    "airline": "i3",
+    "agency": "TIROOZH_PARVAZ",
+    "supplier": "ataa",
+    "basePrice": 25000000,
+    "markup": 0,
+    "payablePrice": 0
+  },
+  {
+    "origin": "SYZ",
+    "destination": "KIH",
+    "airline": "zv",
+    "agency": "FARJAM_PARVAZ",
+    "supplier": "faranegar",
+    "basePrice": 13500000,
+    "markup": 0,
+    "payablePrice": 0
+  }
+]
+
+
+### BAD REQUEST (decoding error)
+POST  http://localhost:5500/create-rule
+Content-Type: application/json
+
+[
+  {
+    "routes": [
+      {
+        "origin": "THR",
+        "destination": "MHD"
+      },
+      {
+      

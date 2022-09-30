@@ -1,6 +1,8 @@
 package model
 
-func (city City) validate() (err error) {
+func (city City) Validate() (err error) {
+	// var _city *City
+	// return db.GetConnection().Table("City").Find(_city, "key = ?", city).Error
 	return nil
 }
 
@@ -16,9 +18,9 @@ func (airline Airline) validate() (err error) {
 	return nil
 }
 
-func (trip Trip) validate() (err error) {
-	errors := []error{trip.Agency.validate(), trip.Airline.validate(), trip.Destination.validate(),
-		trip.Origin.validate(), trip.Supplier.validate()}
+func (trip Trip) Validate() (err error) {
+	errors := []error{trip.Agency.validate(), trip.Airline.validate(), trip.Destination.Validate(),
+		trip.Origin.Validate(), trip.Supplier.validate()}
 	for _, _err := range errors {
 		if _err != nil {
 			return _err
@@ -27,6 +29,6 @@ func (trip Trip) validate() (err error) {
 	return nil
 }
 
-func (rule Rule) validate() (err error) {
+func (rule Rule) Validate() (err error) {
 	return nil
 }

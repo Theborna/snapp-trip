@@ -2,6 +2,8 @@ package model
 
 import (
 	"database/sql/driver"
+
+	"github.com/google/uuid"
 )
 
 // interfaces
@@ -41,28 +43,27 @@ type (
 
 // data types
 type Route struct {
-	Origin      City `json:"origin"`
-	Destination City `json:"destination"`
+	Origin      *City `json:"origin"`
+	Destination *City `json:"destination"`
 }
 
 type Trip struct {
 	RequestImpl
-	RuleId       int      `json:"ruleId"`
-	Origin       City     `json:"origin"`
-	Destination  City     `json:"destination"`
-	Agency       Agency   `json:"agency"`
-	Supplier     Supplier `json:"supplier"`
-	Airline      Airline  `json:"airline"`
-	BasePrice    int      `json:"basePrice"`
-	MarkUp       int      `json:"markup"`
-	PayablePrice int      `json:"payablePrice"`
+	RuleId       *uuid.UUID `json:"ruleId"`
+	Origin       City       `json:"origin"`
+	Destination  City       `json:"destination"`
+	Agency       Agency     `json:"agency"`
+	Supplier     Supplier   `json:"supplier"`
+	Airline      Airline    `json:"airline"`
+	BasePrice    int        `json:"basePrice"`
+	MarkUp       int        `json:"markup"`
+	PayablePrice int        `json:"payablePrice"`
 }
 
 type Rule struct {
 	// gorm.Model
 	RequestImpl
-	RuleId      uint64 `gorm:"column:rule_id;primaryKey;autoIncrement;unique"`
-	RoutesId    uint64
+	RuleId      uuid.UUID
 	Routes      []Route    `json:"routes" gorm:"column:routes;ForeignKey:RoutesId"`
 	Airlines    []Airline  `json:"airlines" gorm:"column:airlines"`
 	Agencies    []Agency   `json:"agencies" gorm:"column:agencies"`
@@ -71,25 +72,9 @@ type Rule struct {
 	AmountValue int        `json:"amountValue"`
 }
 
-// func (ct *RuleModel) TableName() string {
-// 	return "rule"
-// }
-
-// type RuleModel struct {
-// 	gorm.Model
-// 	RequestImpl
-// 	RuleId      uint64     `gorm:"column:rule_id;primaryKey;autoIncrement;unique"`
-// 	Routes      []uint64   `json:"routes" gorm:"column:routes;ForeignKey:RoutesId"`
-// 	Airlines    []Airline  `json:"airlines" gorm:"column:airlines"`
-// 	Agencies    []Agency   `json:"agencies" gorm:"column:agencies"`
-// 	Suppliers   []Supplier `json:"suppliers" gorm:"column:suppliers"`
-// 	AmountType  amountType `json:"amountType" sql:"type:ENUM('FIXED','PERCENTAGE')"`
-// 	AmountValue int        `json:"amountValue"`
-// }
-
 type Response struct {
-	Message string `json:"message"`
-	Status  status `json:"status"`
+	Message *string `json:"message"`
+	Status  status  `json:"status"`
 }
 
 type Student struct {
